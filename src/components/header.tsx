@@ -1,4 +1,4 @@
-import { Map } from 'lucide-react'
+import { Map, Shapes, Trophy } from 'lucide-react'
 
 import { HeaderItem } from './header-item'
 
@@ -12,13 +12,18 @@ export default function Header() {
       />
       <HeaderItem
         text='Projects'
-        icon={<Map />}
+        icon={<Shapes />}
         to='/projects'
       />
       <HeaderItem
-        text='Map'
+        text='Scoreboard'
+        icon={<Trophy />}
+        to='/scoreboard'
+      />
+      <HeaderItem
+        text='Scoreboard'
         icon={<Map />}
-        to='/'
+        to='/scoreboard'
       />
     </header>
   )

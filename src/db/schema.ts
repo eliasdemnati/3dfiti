@@ -9,7 +9,7 @@ export const projects = t.sqliteTable('projects', {
   status: t.text({ enum: ['draft', 'pre-drop', 'available', 'for_sale', 'archived'] }).notNull(),
   createdAt: t.integer('created_at', { mode: 'timestamp' }).default(
     sql`(unixepoch())`,
-  ),
+  ).notNull(),
 })
 
 export const items = t.sqliteTable('items', {
@@ -19,7 +19,7 @@ export const items = t.sqliteTable('items', {
   status: t.text({ enum: ['draft', 'pre-drop', 'dropped', 'claimed', 'purchased', 'lost'] }).notNull(),
   createdAt: t.integer('created_at', { mode: 'timestamp' }).default(
     sql`(unixepoch())`,
-  ),
+  ).notNull(),
 })
 
 export const itemsRelation = relations(items, ({ one }) => ({

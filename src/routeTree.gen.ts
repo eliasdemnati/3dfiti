@@ -9,19 +9,73 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ScoreboardRouteImport } from './routes/scoreboard'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
+import { Route as AdminItemsRouteImport } from './routes/admin/items'
+import { Route as AdminGeecodesRouteImport } from './routes/admin/geecodes'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const ScoreboardRoute = ScoreboardRouteImport.update({
+  id: '/scoreboard',
+  path: '/scoreboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminItemsRoute = AdminItemsRouteImport.update({
+  id: '/items',
+  path: '/items',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGeecodesRoute = AdminGeecodesRouteImport.update({
+  id: '/geecodes',
+  path: '/geecodes',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -31,41 +85,127 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/scoreboard': typeof ScoreboardRoute
+  '/admin/geecodes': typeof AdminGeecodesRoute
+  '/admin/items': typeof AdminItemsRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/projects': typeof ProjectsRoute
+  '/scoreboard': typeof ScoreboardRoute
+  '/admin/geecodes': typeof AdminGeecodesRoute
+  '/admin/items': typeof AdminItemsRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin': typeof AdminIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/scoreboard': typeof ScoreboardRoute
+  '/admin/geecodes': typeof AdminGeecodesRoute
+  '/admin/items': typeof AdminItemsRoute
+  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/projects' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/projects'
+    | '/scoreboard'
+    | '/admin/geecodes'
+    | '/admin/items'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/projects' | '/api/auth/$'
-  id: '__root__' | '/' | '/projects' | '/api/auth/$'
+  to:
+    | '/'
+    | '/about'
+    | '/projects'
+    | '/scoreboard'
+    | '/admin/geecodes'
+    | '/admin/items'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin'
+    | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/projects'
+    | '/scoreboard'
+    | '/admin/geecodes'
+    | '/admin/items'
+    | '/admin/projects'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
+  ScoreboardRoute: typeof ScoreboardRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/scoreboard': {
+      id: '/scoreboard'
+      path: '/scoreboard'
+      fullPath: '/scoreboard'
+      preLoaderRoute: typeof ScoreboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -74,6 +214,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/items': {
+      id: '/admin/items'
+      path: '/items'
+      fullPath: '/admin/items'
+      preLoaderRoute: typeof AdminItemsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/geecodes': {
+      id: '/admin/geecodes'
+      path: '/geecodes'
+      fullPath: '/admin/geecodes'
+      preLoaderRoute: typeof AdminGeecodesRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -85,9 +267,32 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminGeecodesRoute: typeof AdminGeecodesRoute
+  AdminItemsRoute: typeof AdminItemsRoute
+  AdminProjectsRoute: typeof AdminProjectsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminGeecodesRoute: AdminGeecodesRoute,
+  AdminItemsRoute: AdminItemsRoute,
+  AdminProjectsRoute: AdminProjectsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
+  ScoreboardRoute: ScoreboardRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

@@ -5,12 +5,11 @@ import {
   Trophy,
   UserStar,
 } from 'lucide-react'
-
-import { HeaderItem } from './header-item'
+import { HeaderItem } from '@/components/header-item'
 
 export default function Header() {
   return (
-    <header className="p-4 flex items-center justify-between gap-4 bg-black/90 text-white shadow-lg rounded-lg fixed left-4 right-4 top-4 z-50">
+    <header className="p-4 flex items-center justify-between gap-4 bg-black/90 text-white shadow-lg rounded-lg z-50 absolute top-4 left-4 right-4 box-border">
       <div className="flex items-center gap-4">
         <HeaderItem
           text='Map'

@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { eq } from 'drizzle-orm'
 import { db } from '@/db'
-import { projects } from '@/db/schema'
+import { projects } from '@/db/projects'
 
 export const getProjects = createServerFn({ method: 'GET' }).handler(
   async () => {
